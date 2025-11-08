@@ -6,32 +6,57 @@
       "round": 35,
       "matches": [
         {
-          "home": "Paysandu",
-          "away": "Sport Recife",
-          "homeScore": 1,
-          "awayScore": 1,
-          "status": "FINISHED"
-        },
-        {
           "home": "Amazonas",
           "away": "Chapecoense",
-          "homeScore": 2,
-          "awayScore": 0,
-          "status": "FINISHED"
-        },
-        {
-          "home": "Ceará",
-          "away": "Guarani",
-          "homeScore": 3,
+          "homeScore": 1,
           "awayScore": 1,
-          "status": "SCHEDULED"
+          "status": "FINISHED",
+          "date": "2025-11-03T19:00:00"
         },
         {
-          "home": "Ituano",
-          "away": "Vila Nova",
+          "home": "Paysandu",
+          "away": "Sport Recife",
+          "homeScore": 2,
+          "awayScore": 1,
+          "status": "FINISHED",
+          "date": "2025-11-03T21:30:00"
+        },
+        {
+          "home": "Vila Nova",
+          "away": "Ceará",
+          "homeScore": 1,
+          "awayScore": 0,
+          "status": "SCHEDULED",
+          "date": "2025-11-10T19:00:00"
+        },
+        {
+          "home": "Santos",
+          "away": "Ituano",
           "homeScore": 0,
           "awayScore": 0,
-          "status": "SCHEDULED"
+          "status": "SCHEDULED",
+          "date": "2025-11-10T21:30:00"
+        }
+      ]
+    },
+    {
+      "round": 36,
+      "matches": [
+        {
+          "home": "Ceará",
+          "away": "Paysandu",
+          "homeScore": null,
+          "awayScore": null,
+          "status": "SCHEDULED",
+          "date": "2025-11-14T19:00:00"
+        },
+        {
+          "home": "Sport Recife",
+          "away": "Amazonas",
+          "homeScore": null,
+          "awayScore": null,
+          "status": "SCHEDULED",
+          "date": "2025-11-14T21:00:00"
         }
       ]
     }
@@ -78,19 +103,52 @@
       "won": 15,
       "draw": 12,
       "lost": 8,
-      "goalsFor": 45,
+      "goalsFor": 47,
       "goalsAgainst": 35
     },
     {
       "position": 5,
-      "team": "Chapecoense",
+      "team": "Paysandu",
       "points": 55,
       "played": 35,
       "won": 14,
       "draw": 13,
       "lost": 8,
-      "goalsFor": 43,
-      "goalsAgainst": 38
+      "goalsFor": 46,
+      "goalsAgainst": 37
+    },
+    {
+      "position": 6,
+      "team": "Santos",
+      "points": 54,
+      "played": 35,
+      "won": 14,
+      "draw": 12,
+      "lost": 9,
+      "goalsFor": 45,
+      "goalsAgainst": 40
+    },
+    {
+      "position": 7,
+      "team": "Chapecoense",
+      "points": 49,
+      "played": 35,
+      "won": 13,
+      "draw": 10,
+      "lost": 12,
+      "goalsFor": 39,
+      "goalsAgainst": 42
+    },
+    {
+      "position": 8,
+      "team": "Ituano",
+      "points": 44,
+      "played": 35,
+      "won": 11,
+      "draw": 11,
+      "lost": 13,
+      "goalsFor": 37,
+      "goalsAgainst": 43
     }
   ]
 }
