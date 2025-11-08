@@ -1,0 +1,96 @@
+{
+  "competition": "Campeonato Brasileiro Série B 2025",
+  "currentRound": 35,
+  "rounds": [
+    {
+      "round": 35,
+      "matches": [
+        {
+          "home": "Paysandu",
+          "away": "Sport Recife",
+          "homeScore": 1,
+          "awayScore": 1,
+          "status": "FINISHED"
+        },
+        {
+          "home": "Amazonas",
+          "away": "Chapecoense",
+          "homeScore": 2,
+          "awayScore": 0,
+          "status": "FINISHED"
+        },
+        {
+          "home": "Ceará",
+          "away": "Guarani",
+          "homeScore": 3,
+          "awayScore": 1,
+          "status": "SCHEDULED"
+        },
+        {
+          "home": "Ituano",
+          "away": "Vila Nova",
+          "homeScore": 0,
+          "awayScore": 0,
+          "status": "SCHEDULED"
+        }
+      ]
+    }
+  ],
+  "standings": [
+    {
+      "position": 1,
+      "team": "Amazonas",
+      "points": 68,
+      "played": 35,
+      "won": 19,
+      "draw": 11,
+      "lost": 5,
+      "goalsFor": 55,
+      "goalsAgainst": 30
+    },
+    {
+      "position": 2,
+      "team": "Sport Recife",
+      "points": 63,
+      "played": 35,
+      "won": 17,
+      "draw": 12,
+      "lost": 6,
+      "goalsFor": 52,
+      "goalsAgainst": 31
+    },
+    {
+      "position": 3,
+      "team": "Ceará",
+      "points": 59,
+      "played": 35,
+      "won": 16,
+      "draw": 11,
+      "lost": 8,
+      "goalsFor": 49,
+      "goalsAgainst": 36
+    },
+    {
+      "position": 4,
+      "team": "Vila Nova",
+      "points": 57,
+      "played": 35,
+      "won": 15,
+      "draw": 12,
+      "lost": 8,
+      "goalsFor": 45,
+      "goalsAgainst": 35
+    },
+    {
+      "position": 5,
+      "team": "Chapecoense",
+      "points": 55,
+      "played": 35,
+      "won": 14,
+      "draw": 13,
+      "lost": 8,
+      "goalsFor": 43,
+      "goalsAgainst": 38
+    }
+  ]
+}
