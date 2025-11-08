@@ -6,118 +6,91 @@
       "round": 35,
       "matches": [
         {
-          "id": 1,
-          "date": "2025-11-08T18:30:00-03:00",
-          "homeScore": 3,
-"awayScore": 1,
-"status": "LIVE"
-
-        },
-        {
-          "id": 2,
-          "date": "2025-11-08T20:00:00-03:00",
-          "home": "Ceará",
-          "away": "Sampaio Corrêa",
+          "home": "Paysandu",
+          "away": "Sport Recife",
           "homeScore": 1,
           "awayScore": 1,
           "status": "FINISHED"
         },
         {
-          "id": 3,
-          "date": "2025-11-09T16:00:00-03:00",
-          "home": "Vila Nova",
-          "away": "Goiás",
-          "homeScore": null,
-          "awayScore": null,
-          "status": "SCHEDULED"
-        },
-        {
-          "id": 4,
-          "date": "2025-11-09T18:00:00-03:00",
-          "home": "Amazonas FC",
-          "away": "Criciúma",
-          "homeScore": null,
-          "awayScore": null,
-          "status": "SCHEDULED"
-        },
-        {
-          "id": 5,
-          "date": "2025-11-09T20:30:00-03:00",
-          "home": "Ituano",
-          "away": "Guarani",
-          "homeScore": 0,
-          "awayScore": 2,
+          "home": "Amazonas",
+          "away": "Chapecoense",
+          "homeScore": 2,
+          "awayScore": 0,
           "status": "FINISHED"
         },
         {
-          "id": 6,
-          "date": "2025-11-10T19:00:00-03:00",
-          "home": "Chapecoense",
-          "away": "Avaí",
-          "homeScore": null,
-          "awayScore": null,
+          "home": "Ceará",
+          "away": "Guarani",
+          "homeScore": 3,
+          "awayScore": 1,
           "status": "SCHEDULED"
         },
         {
-          "id": 7,
-          "date": "2025-11-10T21:30:00-03:00",
-          "home": "Mirassol",
-          "away": "Botafogo-SP",
-          "homeScore": null,
-          "awayScore": null,
-          "status": "SCHEDULED"
-        },
-        {
-          "id": 8,
-          "date": "2025-11-11T20:00:00-03:00",
-          "home": "Coritiba",
-          "away": "Operário-PR",
-          "homeScore": null,
-          "awayScore": null,
-          "status": "SCHEDULED"
-        },
-        {
-          "id": 9,
-          "date": "2025-11-11T21:00:00-03:00",
-          "home": "ABC",
-          "away": "Juventude",
-          "homeScore": null,
-          "awayScore": null,
-          "status": "SCHEDULED"
-        },
-        {
-          "id": 10,
-          "date": "2025-11-12T19:00:00-03:00",
-          "home": "Novorizontino",
-          "away": "Ponte Preta",
-          "homeScore": null,
-          "awayScore": null,
+          "home": "Ituano",
+          "away": "Vila Nova",
+          "homeScore": 0,
+          "awayScore": 0,
           "status": "SCHEDULED"
         }
       ]
     }
   ],
   "standings": [
-    { "position": 1, "team": "Coritiba", "points": 68, "played": 34, "won": 20, "draw": 8, "lost": 6, "goalsFor": 52, "goalsAgainst": 29 },
-    { "position": 2, "team": "Sport Recife", "points": 64, "played": 34, "won": 18, "draw": 10, "lost": 6, "goalsFor": 47, "goalsAgainst": 30 },
-    { "position": 3, "team": "Goiás", "points": 61, "played": 34, "won": 17, "draw": 10, "lost": 7, "goalsFor": 43, "goalsAgainst": 27 },
-    { "position": 4, "team": "Criciúma", "points": 59, "played": 34, "won": 17, "draw": 8, "lost": 9, "goalsFor": 45, "goalsAgainst": 32 },
-    { "position": 5, "team": "Vila Nova", "points": 57, "played": 34, "won": 16, "draw": 9, "lost": 9, "goalsFor": 41, "goalsAgainst": 30 },
-    { "position": 6, "team": "Mirassol", "points": 54, "played": 34, "won": 15, "draw": 9, "lost": 10, "goalsFor": 38, "goalsAgainst": 31 },
-    { "position": 7, "team": "Avaí", "points": 52, "played": 34, "won": 14, "draw": 10, "lost": 10, "goalsFor": 36, "goalsAgainst": 33 },
-    { "position": 8, "team": "Ceará", "points": 50, "played": 34, "won": 13, "draw": 11, "lost": 10, "goalsFor": 37, "goalsAgainst": 34 },
-    { "position": 9, "team": "Amazonas FC", "points": 48, "played": 34, "won": 13, "draw": 9, "lost": 12, "goalsFor": 34, "goalsAgainst": 35 },
-    { "position": 10, "team": "Guarani", "points": 46, "played": 34, "won": 12, "draw": 10, "lost": 12, "goalsFor": 33, "goalsAgainst": 37 },
-    { "position": 11, "team": "Paysandu", "points": 44, "played": 34, "won": 11, "draw": 11, "lost": 12, "goalsFor": 35, "goalsAgainst": 40 },
-    { "position": 12, "team": "Botafogo-SP", "points": 43, "played": 34, "won": 11, "draw": 10, "lost": 13, "goalsFor": 32, "goalsAgainst": 38 },
-    { "position": 13, "team": "Sampaio Corrêa", "points": 42, "played": 34, "won": 10, "draw": 12, "lost": 12, "goalsFor": 31, "goalsAgainst": 39 },
-    { "position": 14, "team": "Operário-PR", "points": 40, "played": 34, "won": 9, "draw": 13, "lost": 12, "goalsFor": 29, "goalsAgainst": 37 },
-    { "position": 15, "team": "Ituano", "points": 38, "played": 34, "won": 10, "draw": 8, "lost": 16, "goalsFor": 30, "goalsAgainst": 44 },
-    { "position": 16, "team": "Ponte Preta", "points": 37, "played": 34, "won": 9, "draw": 10, "lost": 15, "goalsFor": 28, "goalsAgainst": 42 },
-    { "position": 17, "team": "Chapecoense", "points": 35, "played": 34, "won": 8, "draw": 11, "lost": 15, "goalsFor": 29, "goalsAgainst": 45 },
-    { "position": 18, "team": "Novorizontino", "points": 33, "played": 34, "won": 8, "draw": 9, "lost": 17, "goalsFor": 27, "goalsAgainst": 46 },
-    { "position": 19, "team": "ABC", "points": 28, "played": 34, "won": 6, "draw": 10, "lost": 18, "goalsFor": 25, "goalsAgainst": 48 },
-    { "position": 20, "team": "Juventude", "points": 26, "played": 34, "won": 6, "draw": 8, "lost": 20, "goalsFor": 22, "goalsAgainst": 49 }
+    {
+      "position": 1,
+      "team": "Amazonas",
+      "points": 68,
+      "played": 35,
+      "won": 19,
+      "draw": 11,
+      "lost": 5,
+      "goalsFor": 55,
+      "goalsAgainst": 30
+    },
+    {
+      "position": 2,
+      "team": "Sport Recife",
+      "points": 63,
+      "played": 35,
+      "won": 17,
+      "draw": 12,
+      "lost": 6,
+      "goalsFor": 52,
+      "goalsAgainst": 31
+    },
+    {
+      "position": 3,
+      "team": "Ceará",
+      "points": 59,
+      "played": 35,
+      "won": 16,
+      "draw": 11,
+      "lost": 8,
+      "goalsFor": 49,
+      "goalsAgainst": 36
+    },
+    {
+      "position": 4,
+      "team": "Vila Nova",
+      "points": 57,
+      "played": 35,
+      "won": 15,
+      "draw": 12,
+      "lost": 8,
+      "goalsFor": 45,
+      "goalsAgainst": 35
+    },
+    {
+      "position": 5,
+      "team": "Chapecoense",
+      "points": 55,
+      "played": 35,
+      "won": 14,
+      "draw": 13,
+      "lost": 8,
+      "goalsFor": 43,
+      "goalsAgainst": 38
+    }
   ]
 }
-
