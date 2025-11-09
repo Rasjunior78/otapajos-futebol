@@ -23,7 +23,7 @@ if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR);
 const DATA_PATH = path.join(DATA_DIR, "serieB.json");
 
 const PORT = process.env.PORT || 10000;
-const API_KEY = process.env.API_SPORTS_KEY || ""; // define no Render
+const API_KEY = process.env.API_SPORTS_KEY || "05723c5548f1ea50bd02a28e264bbc14"; // define no Render
 const LEAGUE_ID = 73; // Série B (API-Sports league id)
 const SEASON = 2025;  // temporada
 
@@ -199,3 +199,4 @@ initialAndSchedule();
 server.listen(PORT, () => {
   console.log(`🌍 Server rodando na porta ${PORT}`);
 });
+
