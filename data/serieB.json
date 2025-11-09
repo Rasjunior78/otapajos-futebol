@@ -1,154 +1,156 @@
-{
-  "competition": "Campeonato Brasileiro Série B 2025",
-  "currentRound": 35,
-  "rounds": [
-    {
-      "round": 35,
-      "matches": [
-        {
-          "home": "Amazonas",
-          "away": "Chapecoense",
-          "homeScore": 1,
-          "awayScore": 1,
-          "status": "FINISHED",
-          "date": "2025-11-03T19:00:00"
-        },
-        {
-          "home": "Paysandu",
-          "away": "Sport Recife",
-          "homeScore": 2,
-          "awayScore": 1,
-          "status": "FINISHED",
-          "date": "2025-11-03T21:30:00"
-        },
-        {
-          "home": "Vila Nova",
-          "away": "Ceará",
-          "homeScore": 1,
-          "awayScore": 0,
-          "status": "SCHEDULED",
-          "date": "2025-11-10T19:00:00"
-        },
-        {
-          "home": "Santos",
-          "away": "Ituano",
-          "homeScore": 0,
-          "awayScore": 0,
-          "status": "SCHEDULED",
-          "date": "2025-11-10T21:30:00"
-        }
-      ]
-    },
-    {
-      "round": 36,
-      "matches": [
-        {
-          "home": "Ceará",
-          "away": "Paysandu",
-          "homeScore": null,
-          "awayScore": null,
-          "status": "SCHEDULED",
-          "date": "2025-11-14T19:00:00"
-        },
-        {
-          "home": "Sport Recife",
-          "away": "Amazonas",
-          "homeScore": null,
-          "awayScore": null,
-          "status": "SCHEDULED",
-          "date": "2025-11-14T21:00:00"
-        }
-      ]
-    }
-  ],
-  "standings": [
-    {
-      "position": 1,
-      "team": "Amazonas",
-      "points": 68,
-      "played": 35,
-      "won": 19,
-      "draw": 11,
-      "lost": 5,
-      "goalsFor": 55,
-      "goalsAgainst": 30
-    },
-    {
-      "position": 2,
-      "team": "Sport Recife",
-      "points": 63,
-      "played": 35,
-      "won": 17,
-      "draw": 12,
-      "lost": 6,
-      "goalsFor": 52,
-      "goalsAgainst": 31
-    },
-    {
-      "position": 3,
-      "team": "Ceará",
-      "points": 59,
-      "played": 35,
-      "won": 16,
-      "draw": 11,
-      "lost": 8,
-      "goalsFor": 49,
-      "goalsAgainst": 36
-    },
-    {
-      "position": 4,
-      "team": "Vila Nova",
-      "points": 57,
-      "played": 35,
-      "won": 15,
-      "draw": 12,
-      "lost": 8,
-      "goalsFor": 47,
-      "goalsAgainst": 35
-    },
-    {
-      "position": 5,
-      "team": "Paysandu",
-      "points": 55,
-      "played": 35,
-      "won": 14,
-      "draw": 13,
-      "lost": 8,
-      "goalsFor": 46,
-      "goalsAgainst": 37
-    },
-    {
-      "position": 6,
-      "team": "Santos",
-      "points": 54,
-      "played": 35,
-      "won": 14,
-      "draw": 12,
-      "lost": 9,
-      "goalsFor": 45,
-      "goalsAgainst": 40
-    },
-    {
-      "position": 7,
-      "team": "Chapecoense",
-      "points": 49,
-      "played": 35,
-      "won": 13,
-      "draw": 10,
-      "lost": 12,
-      "goalsFor": 39,
-      "goalsAgainst": 42
-    },
-    {
-      "position": 8,
-      "team": "Ituano",
-      "points": 44,
-      "played": 35,
-      "won": 11,
-      "draw": 11,
-      "lost": 13,
-      "goalsFor": 37,
-      "goalsAgainst": 43
-    }
-  ]
+// oTaPajós Futebol — Série B 2025 (dados reais via API-Football)
+// Desenvolvido para Reinaldo Santos Jr. | www.otapajos.com.br/futebol
+// Atualiza automaticamente tabela e rodadas com dados reais da Série B
+
+import express from "express";
+import fs from "fs";
+import path from "path";
+import http from "http";
+import cors from "cors";
+import fetch from "node-fetch";
+import { WebSocketServer } from "ws";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server });
+
+const DATA_PATH = path.join(__dirname, "data", "serieB.json");
+const API_KEY = "05723c5548f1ea50bd02a28e264bbc14"; // ⚠️ sua chave atual
+const API_URL = "https://v3.football.api-sports.io";
+const LEAGUE_ID = 73; // Série B
+const SEASON = 2025;
+const UPDATE_INTERVAL = 10 * 60 * 1000; // 10 minutos
+
+// ===================================================
+// 🔁 Função principal — buscar dados reais
+// ===================================================
+async function atualizarDados() {
+  try {
+    console.log("⏳ Atualizando dados da Série B 2025...");
+
+    const headers = { "x-apisports-key": API_KEY };
+
+    const [standingsRes, fixturesRes] = await Promise.all([
+      fetch(`${API_URL}/standings?league=${LEAGUE_ID}&season=${SEASON}`, { headers }),
+      fetch(`${API_URL}/fixtures?league=${LEAGUE_ID}&season=${SEASON}`, { headers }),
+    ]);
+
+    if (!standingsRes.ok || !fixturesRes.ok)
+      throw new Error("Falha ao acessar API-Football");
+
+    const standingsData = await standingsRes.json();
+    const fixturesData = await fixturesRes.json();
+
+    const standingsList =
+      standingsData.response?.[0]?.league?.standings?.[0] || [];
+
+    const standings = standingsList.map((team) => ({
+      position: team.rank,
+      team: team.team.name,
+      points: team.points,
+      played: team.all.played,
+      won: team.all.win,
+      draw: team.all.draw,
+      lost: team.all.lose,
+      goalsFor: team.all.goals.for,
+      goalsAgainst: team.all.goals.against,
+    }));
+
+    const fixtures = fixturesData.response || [];
+    const roundsMap = {};
+
+    fixtures.forEach((f) => {
+      const round = f.league.round || "Desconhecida";
+      if (!roundsMap[round]) roundsMap[round] = [];
+      roundsMap[round].push({
+        home: f.teams.home.name,
+        away: f.teams.away.name,
+        homeScore: f.goals.home,
+        awayScore: f.goals.away,
+        status: mapStatus(f.fixture.status.short),
+        date: f.fixture.date,
+      });
+    });
+
+    const rounds = Object.keys(roundsMap).map((r) => ({
+      round: r,
+      matches: roundsMap[r],
+    }));
+
+    const rodadaAtual =
+      rounds.find((r) =>
+        r.matches.some((m) => m.status === "LIVE" || m.status === "IN_PLAY")
+      )?.round || rounds[0]?.round;
+
+    const data = {
+      competition: "Campeonato Brasileiro Série B 2025",
+      currentRound: rodadaAtual,
+      standings,
+      rounds,
+      updated: new Date().toISOString(),
+    };
+
+    fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
+    console.log("✅ Dados atualizados e salvos.");
+
+    broadcastUpdate(data);
+  } catch (err) {
+    console.error("❌ Erro ao atualizar dados:", err.message);
+  }
 }
+
+// ===================================================
+// 🛰️ Enviar atualização a todos os navegadores
+// ===================================================
+function broadcastUpdate(data) {
+  const json = JSON.stringify(data);
+  wss.clients.forEach((client) => {
+    if (client.readyState === 1) client.send(json);
+  });
+  console.log("📡 Atualização enviada a todos os clientes.");
+}
+
+// ===================================================
+// 🕹️ Mapeia status da API para legível
+// ===================================================
+function mapStatus(status) {
+  if (!status) return "SCHEDULED";
+  const s = status.toUpperCase();
+  if (["NS", "TBD"].includes(s)) return "SCHEDULED";
+  if (["1H", "2H", "LIVE"].includes(s)) return "LIVE";
+  if (["FT", "AET", "PEN"].includes(s)) return "FINISHED";
+  return "SCHEDULED";
+}
+
+// ===================================================
+// 🌍 Endpoints
+// ===================================================
+app.get("/data", (req, res) => {
+  try {
+    const data = fs.readFileSync(DATA_PATH, "utf8");
+    res.type("application/json").send(data);
+  } catch {
+    res.status(500).json({ error: "Sem dados locais" });
+  }
+});
+
+// ===================================================
+// ⏰ Atualização automática
+// ===================================================
+setInterval(atualizarDados, UPDATE_INTERVAL);
+atualizarDados();
+
+// ===================================================
+// 🚀 Inicialização
+// ===================================================
+const PORT = process.env.PORT || 10000;
+server.listen(PORT, () =>
+  console.log(`🌍 Servidor oTaPajós Futebol rodando na porta ${PORT}`)
+);
