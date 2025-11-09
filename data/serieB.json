@@ -7,12 +7,41 @@
       "round": "35",
       "matches": [
         {
+          "home": "Amazonas",
+          "away": "Chapecoense",
+          "homeScore": 1,
+          "awayScore": 1,
+          "status": "FINISHED",
+          "date": "2025-11-03T19:00:00Z"
+        },
+        {
           "home": "Paysandu",
           "away": "Sport Recife",
           "homeScore": 2,
           "awayScore": 1,
           "status": "FINISHED",
           "date": "2025-11-03T21:30:00Z"
+        },
+        {
+          "home": "Vila Nova",
+          "away": "Ceará",
+          "homeScore": null,
+          "awayScore": null,
+          "status": "SCHEDULED",
+          "date": "2025-11-10T19:00:00Z"
+        }
+      ]
+    },
+    {
+      "round": "36",
+      "matches": [
+        {
+          "home": "Ceará",
+          "away": "Paysandu",
+          "homeScore": null,
+          "awayScore": null,
+          "status": "SCHEDULED",
+          "date": "2025-11-14T19:00:00Z"
         }
       ]
     }
@@ -28,6 +57,28 @@
       "lost": 5,
       "goalsFor": 55,
       "goalsAgainst": 30
+    },
+    {
+      "position": 2,
+      "team": "Sport Recife",
+      "points": 63,
+      "played": 35,
+      "won": 17,
+      "draw": 12,
+      "lost": 6,
+      "goalsFor": 52,
+      "goalsAgainst": 31
+    },
+    {
+      "position": 3,
+      "team": "Ceará",
+      "points": 59,
+      "played": 35,
+      "won": 16,
+      "draw": 11,
+      "lost": 8,
+      "goalsFor": 49,
+      "goalsAgainst": 36
     }
   ]
 }
