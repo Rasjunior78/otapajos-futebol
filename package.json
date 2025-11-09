@@ -1,6 +1,7 @@
 {
   "name": "otapajos-futebol",
   "version": "1.0.0",
+  "description": "Servidor oTaPajós Futebol - Série B 2025 (API-Football)",
   "type": "module",
   "main": "server.js",
   "scripts": {
