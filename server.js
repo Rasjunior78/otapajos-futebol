@@ -1,92 +1,122 @@
-// server.js — oTaPajós Futebol 2025
-// Servidor WebSocket + Endpoint de atualização
-// Desenvolvido por Reinaldo Santos Jr. © 2025
+// oTaPajós Futebol — Dados Reais Série B 2025
+// Desenvolvido para Reinaldo Santos Jr.
+// Fonte oficial: API Futebol (https://api.api-futebol.com.br)
 
 import express from "express";
 import fs from "fs";
-import path from "path";
 import http from "http";
+import cors from "cors";
+import fetch from "node-fetch";
 import { WebSocketServer } from "ws";
+import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
-const DATA_PATH = path.resolve("./data/serieB.json");
-const AUTH_TOKEN = "otapajos2025"; // 🔒 senha usada no painel admin
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server });
 
-// =========================
-// 🌐 ENDPOINT DE ATUALIZAÇÃO
-// =========================
-app.post("/update", (req, res) => {
-  const auth = req.headers.authorization;
+const DATA_PATH = path.join(__dirname, "data", "serieB.json");
+const API_URL = "https://api.api-futebol.com.br/v1/campeonatos/11";
+const TOKEN = "SEU_TOKEN_AQUI"; // 🔒 Cole aqui o token do painel API Futebol
 
-  if (!auth || auth !== `Bearer ${AUTH_TOKEN}`) {
-    console.warn("🚫 Tentativa de acesso não autorizado");
-    return res.status(403).json({ erro: "Não autorizado" });
-  }
-
+// =======================================================
+// 🔄 Função para buscar dados reais da Série B 2025
+// =======================================================
+async function atualizarDados() {
   try {
-    fs.writeFileSync(DATA_PATH, JSON.stringify(req.body, null, 2));
-    console.log("✅ Arquivo serieB.json atualizado via painel admin!");
-    broadcastUpdate(req.body);
-    res.json({ sucesso: true, mensagem: "Arquivo atualizado com sucesso" });
-  } catch (err) {
-    console.error("❌ Erro ao salvar:", err);
-    res.status(500).json({ erro: "Falha ao salvar dados" });
-  }
-});
+    console.log("⏳ Atualizando dados da Série B 2025...");
 
-// =========================
-// 🔍 ENDPOINT DE CONSULTA (para debug)
-// =========================
+    const [tabelaRes, rodadasRes] = await Promise.all([
+      fetch(`${API_URL}/tabela`, {
+        headers: { Authorization: `Bearer ${TOKEN}` },
+      }),
+      fetch(`${API_URL}/rodadas`, {
+        headers: { Authorization: `Bearer ${TOKEN}` },
+      }),
+    ]);
+
+    if (!tabelaRes.ok || !rodadasRes.ok) throw new Error("Falha nas requisições");
+
+    const tabela = await tabelaRes.json();
+    const rodadas = await rodadasRes.json();
+
+    const rodadaAtual = rodadas.find((r) => r.status === "andamento")?.rodada || rodadas.length;
+
+    const data = {
+      competition: "Campeonato Brasileiro Série B 2025",
+      currentRound: rodadaAtual,
+      rounds: rodadas.map((r) => ({
+        round: r.rodada,
+        matches: r.partidas.map((p) => ({
+          home: p.time_mandante.nome_popular,
+          away: p.time_visitante.nome_popular,
+          homeScore: p.placar_mandante,
+          awayScore: p.placar_visitante,
+          status: p.status,
+          date: p.data_realizacao_iso,
+        })),
+      })),
+      standings: tabela.map((t, i) => ({
+        position: i + 1,
+        team: t.time.nome_popular,
+        points: t.pontos,
+        played: t.jogos,
+        won: t.vitorias,
+        draw: t.empates,
+        lost: t.derrotas,
+        goalsFor: t.gols_pro,
+        goalsAgainst: t.gols_contra,
+      })),
+    };
+
+    fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
+    console.log("✅ Dados reais atualizados com sucesso!");
+
+    broadcastUpdate(data);
+  } catch (err) {
+    console.error("❌ Erro ao atualizar dados:", err.message);
+  }
+}
+
+// =======================================================
+// 📡 WebSocket — envia atualização a todos os clientes
+// =======================================================
+function broadcastUpdate(newData) {
+  const dataString = JSON.stringify(newData);
+  wss.clients.forEach((client) => {
+    if (client.readyState === 1) client.send(dataString);
+  });
+  console.log("📢 Atualização enviada a todos os navegadores conectados!");
+}
+
+// =======================================================
+// 🌍 Endpoint de verificação
+// =======================================================
 app.get("/data", (req, res) => {
   try {
     const data = fs.readFileSync(DATA_PATH, "utf8");
     res.json(JSON.parse(data));
-  } catch (err) {
-    res.status(500).json({ erro: "Falha ao ler dados" });
+  } catch {
+    res.status(500).json({ erro: "Falha ao ler arquivo local" });
   }
 });
 
-// =========================
-// ⚙️ SERVIDOR HTTP + WEBSOCKET
-// =========================
-const server = http.createServer(app);
-const wss = new WebSocketServer({ server });
+// =======================================================
+// ⏰ Atualiza automaticamente a cada 10 minutos
+// =======================================================
+setInterval(atualizarDados, 10 * 60 * 1000); // 10 min
+atualizarDados(); // primeira atualização imediata
 
-wss.on("connection", (ws) => {
-  console.log("🟢 Novo cliente conectado via WebSocket!");
-
-  // Envia os dados atuais ao cliente
-  try {
-    const data = fs.readFileSync(DATA_PATH, "utf8");
-    ws.send(data);
-  } catch (err) {
-    ws.send(JSON.stringify({ erro: "Falha ao carregar dados" }));
-  }
-
-  ws.on("close", () => console.log("🔴 Cliente desconectado"));
-});
-
-// =========================
-// 📢 Função para enviar atualizações em tempo real
-// =========================
-function broadcastUpdate(newData) {
-  const dataString = JSON.stringify(newData);
-  wss.clients.forEach(client => {
-    if (client.readyState === 1) {
-      client.send(dataString);
-    }
-  });
-  console.log("📡 Atualização transmitida a todos os clientes conectados!");
-}
-
-// =========================
-// 🚀 INICIA O SERVIDOR
-// =========================
+// =======================================================
+// 🚀 Inicialização do servidor
+// =======================================================
 const PORT = process.env.PORT || 10000;
-server.listen(PORT, () => console.log(`🌍 Servidor rodando na porta ${PORT}`));
+server.listen(PORT, () =>
+  console.log(`🌍 Servidor oTaPajós Futebol rodando na porta ${PORT}`)
+);
